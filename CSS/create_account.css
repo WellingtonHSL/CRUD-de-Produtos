@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px; /* Espaçamento entre a imagem e o fieldset */
+}
+
+main img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+    margin-right: auto;
+    margin-left: -1%;
+    margin-bottom: 50px;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 650px; 
+    height: 720px;
+    padding: 20px;
+    margin-right: 9.5%;
+    margin-bottom: 1.1%;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #DF2A4C;
+}
+
+.style_button {
+    width: 145px;
+    height: 50px;
+    margin-top: -690px;
+    background-color: #FFFFFF;
+    color: #DF2A4C;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center; 
+    display: inline-block; 
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(223, 42, 76, 1); /* Sombra */
+    cursor: pointer; /* Mostra o cursor de mão */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+
+.style_button:hover {
+    background-color: #DF2A4C;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 1);
+}
+
+.style_button:active {
+    background-color: #1D4B3B;
+    transform: translateY(2px);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input:focus {
+    outline: none; 
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    margin-top: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+    width: 19em;
+    height: 50px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: none;
+    font-size: 24px;
+    line-height: 50px;
+}
+
+form input[type="text"]::placeholder,
+form input[type="email"]::placeholder,
+form input[type="password"]::placeholder {
+    font-size: 24px;
+    color: #1D4B3B;
+}
+
+form input[type="submit"] {
+    margin-top: 40px;
+    width: 230px;
+    height: 70px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    color: #DF2A4C;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: center;
+}
+
+form input[type="submit"]:hover {
+    background-color: #1D4B3B;
+    color: #FFFFFF;
+}
+
+h1 {
+    font-size: 64px;
+    color: #FFFFFF;
+    font-family: 'Gravitas One';
+    margin-top: 80px;
+}
+
+h2 {
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+p {
+    font-size: 26px;
+    margin-top: 60px;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+    gap: 20px;
+    padding-left: 10px;
+}
+
+/*FOOTER*/
+.nav_footer {
+    position: fixed;
+    top: 87%;
+    width: 100%;
+    justify-items: center;
+    align-items: flex-end;
+    display: flex;
+    background-color: #1D4B3B;
+    color: #FFFFFF;
+    height: 120px;
+    gap: 0px;
+    text-align: center;
+    display: flex;
+    padding-right: 150px;
+    padding-top: 25px;
+}
+
+.nav_footer p {
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: justify;
+    color: #FFFFFF;
+    padding: 45px;
+    margin: 0px;
+    margin-left: 90px;
+    padding-top: 20px; 
+    padding-left: 5px;
+}
+
+.nav_footer ul {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+    align-items: center;
+    list-style: none;  
+    margin-left: 550px;
+}
+
+.nav_footer_div {
+    width: 5px;
+}
+.nav_footer_div p {
+    font-size: 25px;
+    color: #ffffff;
+    flex-direction: column !important;
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 5px;
+    Height: 75px;
+    margin-left: 45px;
+}
+
+.nav_footer li {
+    color: #FFFFFF;
+    padding: 10px;
+    padding-left: 40px;
+    margin-top: 100px;
+    margin-right: 0px;
+    margin-bottom: 20px;
+}
+
+.nav_footer a {
+    font-size: 20px;
+    margin-right: 0px;
+    margin-left: 10px;
+    padding-bottom: 0px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #FFFFFF;
+
+}
+
+.linkedin_icon {
+    display: inline;
+    width: 20px;
+    height: 20px;
+    top: 961px;
+    left: 1071px;
+    gap: 0px;
+    opacity: 0px;  
+}
