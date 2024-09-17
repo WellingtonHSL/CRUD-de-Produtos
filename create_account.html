@@ -19,13 +19,10 @@
             <h1>CADASTRAR</h1>
             <h2>BEM-VINDO AO <b style="color: #1D4B3B;">UNIVERSO LITERÁRIO</b>!</h2>
 
-            <form action="PHP/" method="post">
-                <label for="name"></label>
-                <input type="text" id="name" name="name" placeholder="Nome">
-                <label for="email"></label>
-                <input type="email" id="email" name="email" placeholder="E-mail">
-                <label for="password"></label>
-                <input type="password" id="password" name="password" placeholder="Senha">
+            <form action="PHP/user_register.php" method="post">
+                <input type="text" id="name" name="name" placeholder="Nome" required>
+                <input type="email" id="email" name="email" placeholder="E-mail" required>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
 
                 <input type="submit" value="Cadastrar">
             </form>
