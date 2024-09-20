@@ -11,29 +11,26 @@ class UserLogin {
         }
 
         try {
-            $db = usePDO::getInstance();
-            $sql = "SELECT senha FROM users WHERE email = :email";
+            $db = usePDO::getInstance()->getConnection();
+            $sql = "SELECT password FROM users WHERE email = :email"; // Verifique o nome da coluna
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                $hashedPassword = $result['senha'];
+                $hashedPassword = $result['password'];
 
                 if (password_verify($password, $hashedPassword)) {
-                    // Se a senha estiver correta, redireciona para a homepage
-                    $_SESSION['user_email'] = $email;
+                    $_SESSION['email'] = $email;
                     header('Location: homepage.php');
                     exit();
                 } else {
-                    // Senha incorreta, redireciona para a página de login com mensagem de erro
                     $_SESSION['error_message'] = "Senha incorreta.";
                     header('Location: ../login.html');
                     exit();
                 }
             } else {
-                // Email não existe no banco de dados
                 $_SESSION['error_message'] = "Não existe cadastro com este email.";
                 header('Location: ../login.html');
                 exit();
@@ -44,7 +41,6 @@ class UserLogin {
     }
 }
 
-// Processamento do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -53,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = $login->authenticate($email, $password);
 
     if ($error) {
-        // Exibe a mensagem de erro se houver
         $_SESSION['error_message'] = $error;
         header('Location: login.html');
         exit();
