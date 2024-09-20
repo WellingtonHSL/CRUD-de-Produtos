@@ -37,18 +37,28 @@ header {
 
 .nav_header_a {
     color: #FFFFFF;
-    text-decoration: none;
-    list-style: none;
     display: flex;
-    gap: 160px;
+    align-items: center;
+    list-style: none;
     margin-right: 12%;
 }
 
 .nav_header_a li {
     font-size: 20px;
-    list-style: none;
     color: #FFFFFF;
     padding-top: 5px;
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.logout_icon {
+    width: 18px;
+    height: 16.8px;
+    margin-right: 160px;
 }
 
 .shopping_cart {
@@ -104,7 +114,7 @@ form {
     gap: 20px; 
 }
 
-#book_name {
+#bookName {
     flex: 3;
 }
 

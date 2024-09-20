@@ -1,10 +1,15 @@
 <?php
 require_once 'PDO.php';
 require_once 'user.php';
-
 session_start();
 
 class UserRegister extends User {
+    private $db;
+
+    public function __construct($name, $email, $password) {
+        $this->db = usePDO::getInstance();
+        $this->db->getConnection();
+    }
 
     public function createAccount() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,37 +19,37 @@ class UserRegister extends User {
             $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
             if (!empty($name) && !empty($email) && !empty($password)) {
-                $user = new User($name, $email, $password);
-                $user->encryptPassword(); 
-                $db = usePDO::getInstance();
 
-                if ($db) {
+                $user = new User($name, $email, $password);
+                $user->encryptPassword();
+
+                if ($this->db) {
                     try {
-                        // Verifica se o email já está cadastrado
+
                         $sql = "SELECT * FROM users WHERE email = :email";
-                        $stmt = $db->prepare($sql);
+                        $stmt = $this->db->conn->prepare($sql);
                         $stmt->bindParam(':email', $email);
                         $stmt->execute();
 
                         if ($stmt->rowCount() > 0) {
-                            // Email já cadastrado
+                            
                             $_SESSION['error_message'] = "Email já cadastrado.";
                             header('Location: ../create_account.html');
                             exit();
                         }
 
-                        // Se o email não existe, cria a nova conta
-                        $sql = "INSERT INTO users (nome, email, senha) VALUES (:nome, :email, :senha)";
-                        $stmt = $db->prepare($sql);
-                        $stmt->bindParam(':nome', $user->getName());
+                        
+                        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+                        $stmt = $this->db->conn->prepare($sql);
+                        $stmt->bindParam(':name', $user->getName());
                         $stmt->bindParam(':email', $user->getEmail());
-                        $stmt->bindParam(':senha', $user->getPassword());
+                        $stmt->bindParam(':password', $user->getPassword());
 
                         if ($stmt->execute()) {
-                            // Conta criada com sucesso, redireciona para a página de login
+                            
                             $_SESSION['success_message'] = "Conta criada com sucesso!";
                             header('Location: ../login.html');
-                            exit(); 
+                            exit();
                         } else {
                             echo "Erro ao criar conta.";
                         }
