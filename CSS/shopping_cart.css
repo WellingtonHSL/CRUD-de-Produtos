@@ -88,6 +88,130 @@ header {
     text-decoration: underline;
 }
 
+/*BODY*/
+main {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 1300px;
+}
+
+.left_container {
+    flex: 2;
+    margin-right: 30px;
+}
+
+.right_container {
+    flex: 1;
+    margin-left: 30px;
+}
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F8EBDE;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+}
+
+.left_container fieldset {
+    margin-top: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+}
+
+.left_container h3 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.left_container h4 {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1D4B3B;
+}
+
+.left_container p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #5F5F5F;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.right_container h3 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.separator {
+    margin: 20px 0; 
+    border: none;
+    height: 1px;
+    background-color: #1D4B3B;
+    width: 100%;
+}
+
+.right_container h4 {
+    margin-top: 150px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1D4B3B;
+}
+
+.right_container h3, .right_container h4 {
+    text-align: end;
+    width: 100%;
+    margin: 10px 0;
+    padding-right: 30px;
+}
+
+.right_container fieldset {
+    width: 300px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+}
+
+input[type="submit"] {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 10px;
+    width: 276px;
+    background-color: #FFFFFF;
+    color: #1D4B3B;
+    font-size: 24px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px rgba(29, 75, 59, 0.7);
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    box-shadow: 0px 0px 6px rgba(29, 75, 59, 0.7);
+    color: #FFFFFF;
+    background: #1D4B3B;
+}
+
 /*FOOTER*/
 .nav_footer {
     position: fixed;

@@ -1,7 +1,8 @@
 <?php
 require_once 'PDO.php';
-session_start();
 
+session_start();
+//RETORNAR O NOME LOGADO
 $name = '';
 
 if (isset($_SESSION['email'])) {
@@ -23,13 +24,6 @@ if (isset($_SESSION['email'])) {
         error_log('Erro ao buscar nome: ' . $e->getMessage());
     }
 }
-
-$db = usePDO::getInstance();
-$connection = $db->getConnection();
-
-$query = "SELECT * FROM product_registration";
-$stmt =  $connection->query($query);
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +31,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../CSS/homepage.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../CSS/empty_shopping_cart.css" media="screen" />
 
     <title>UNIVERSO LITERÁRIO</title>
 </head>
@@ -65,23 +59,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
 
-    <main>  
-        <form action="shopping_cart_process.php" method="post">
-            <?php
-                foreach($products as $product) {
-                    echo '<fieldset>';
-                        echo '<h3>' . htmlspecialchars($product['bookName']) . '</h3>';
-                        echo '<p>' . htmlspecialchars($product['description']) . '</p>';
-                        echo '<div class="product-item">';
-                            echo '<h4>R$ ' . htmlspecialchars($product['price']) . '</h4>';
-                            echo '<label><input type="checkbox" name="products[]" value="' . htmlspecialchars($product['id']) . '"></label>';
-                        echo '</div>';
-                    echo '</fieldset>';
-                }   
-            ?>
-
-            <input type="submit" value="Adicionar no Carrinho">
-        </form>
+    <main>
+        <h2>Carrinho de Compras Vazio!</h2>
     </main>
 
     <footer>
