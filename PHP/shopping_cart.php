@@ -1,7 +1,8 @@
 <?php
 require_once 'PDO.php';
-session_start();
+require_once 'shopping_cart_process.php';
 
+//RETORNAR O NOME LOGADO
 $name = '';
 
 if (isset($_SESSION['email'])) {
@@ -23,6 +24,28 @@ if (isset($_SESSION['email'])) {
         error_log('Erro ao buscar nome: ' . $e->getMessage());
     }
 }
+
+//RETORNA OS PRODUTOS ADICIONADOS NO CARRINHO
+$db = usePDO::getInstance();
+$cart = new ShoppingCart($db);
+$cart_products = $cart->getProducts();
+$total_price = $cart->calculateTotal();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['products'])) {
+    $selected_products = $_POST['products'];
+
+    foreach ($selected_products as $product_id) {
+        $cart->addProduct($product_id);
+    }
+
+    header('Location: shopping_cart.php');
+    exit();
+}
+
+if (empty($cart_products)) {
+    header('Location: empty_shopping_cart.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +53,7 @@ if (isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../CSS/homepage.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../CSS/shopping_cart.css" media="screen" />
 
     <title>UNIVERSO LITERÁRIO</title>
 </head>
@@ -59,7 +82,39 @@ if (isset($_SESSION['email'])) {
     </header>
 
     <main>
-        
+        <div class="left_container">
+        <?php
+            foreach ($cart_products as $product_id) {
+                $product = $cart->readProduct($product_id);
+                if ($product) {
+                    echo '<fieldset>';
+                        echo '<h3>' . htmlspecialchars($product['bookName']) . '</h3>';
+                        echo '<p>' . htmlspecialchars($product['description']) . '</p>';
+                        echo '<h4>R$ ' . htmlspecialchars($product['price']) . '</h4>';    
+                    echo '</fieldset>';
+                }
+            }
+        ?>
+        </div>
+
+        <div class="right_container">
+        <form action="checkout.php" method="post">
+            <h2>Resumo do Pedido</h2>
+            <fieldset>
+                <?php
+                    foreach ($cart_products as $product_id) {
+                        $product = $cart->readProduct($product_id);
+                        if ($product) {   
+                                echo '<h4>R$ ' . htmlspecialchars($product['price']) . '</h4>';
+                        }
+                    }
+                ?>
+                <hr class="separator">
+                <h3>Total: R$ <?php echo number_format($total_price, 2, ',', '.'); ?></h3>
+            </fieldset>
+            <input type="submit" value="Finalizar Compra">
+        </form>
+        </div>
     </main>
 
     <footer>
