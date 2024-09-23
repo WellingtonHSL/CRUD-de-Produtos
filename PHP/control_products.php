@@ -3,18 +3,14 @@ require_once 'PDO.php';
 session_start();
 
 $name = '';
-
 if (isset($_SESSION['email'])) {
     $user_email = $_SESSION['email'];
-    
     try {
         $db = usePDO::getInstance()->getConnection();
-        
         $sql = "SELECT name FROM users WHERE email = :email";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':email', $user_email);
         $stmt->execute();
-        
         if ($stmt->rowCount() > 0) {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $name = htmlspecialchars($result['name']);
@@ -23,6 +19,26 @@ if (isset($_SESSION['email'])) {
         error_log('Erro ao buscar nome: ' . $e->getMessage());
     }
 }
+
+$db = usePDO::getInstance();
+$connection = $db->getConnection();
+$query = "SELECT * FROM product_registration";
+$stmt = $connection->query($query);
+$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Excluindo produto
+if (isset($_GET['delete_id'])) {
+    $product_id = intval($_GET['delete_id']);
+    $db->deleteProduct($product_id);
+    header("Location: control_products.php");
+    exit;
+}
+
+if (isset($_GET['update_id'])) {
+    $id_update = intval($_GET['update_id']);
+    $product = $db->readProduct($id_update); 
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +47,6 @@ if (isset($_SESSION['email'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../CSS/control_products.css" media="screen" />
-
     <title>UNIVERSO LITERÁRIO</title>
 </head>
 <body>
@@ -59,20 +74,52 @@ if (isset($_SESSION['email'])) {
     </header>
 
     <main>
-        
+        <h1>Controle de Produtos</h1>
+        <section id="update">
+            <form method=post  action="control_products.php">
+                <label for="bookName">Nome do Livro</label>
+                <input type="text" id="bookName" name="bookName" value=" <?php if(isset($product)){echo $product['bookName'];} ?>" placeholder="Nome do Livro" required>
+                
+                <label for="price">preço</label>
+                <input type="number" id="price" name="price" value=" <?php if(isset($product)){echo $product['price'];} ?>" placeholder="Preço" required>
+                
+                <label for="quantity">Quantidade</label>
+                <input type="number" id="quantity" name="quantity" value=" <?php if(isset($product)){echo $product['quantity'];} ?>" placeholder="Quantidade" required>
+                
+                <label for="full_name">Fornecedor</label>
+                <input type="text" id="full_name" name="full_name" value=" <?php if(isset($product)){echo $product['full_name'];} ?>" placeholder="Fornecedor" required>    
+                
+                <label for="description">description</label>
+                <input type="text" id="description" name="description" value=" <?php if(isset($product)){echo $product['description'];} ?>" placeholder="Descrição" required>
+                
+                <input type="submit" value="Atualizar">
+            </form>
+
+        </section>
+        <?php foreach ($products as $product): ?>
+            <section id="listProducts">
+                <h3><?php echo htmlspecialchars($product['bookName']); ?></h3>
+                <p><?php echo htmlspecialchars($product['description']); ?></p>
+                <label> R$ <?php echo htmlspecialchars(number_format($product['price'], 2, ',', '.')); ?></label>
+                    
+                <a href="control_products.php?update_id=<?php echo $product['id']; ?>">Editar</a>
+                <a href="control_products.php?delete_id=<?php echo $product['id']; ?>">Excluir</a>
+
+            </section>
+            <?php endforeach; ?>
     </main>
 
     <footer>
         <nav class="nav_footer"> 
-            <p>©2024 UNIVERSO LITERÁRIO</p>
-           
-        <ul>
-            <div class="nav_footer_div"><p>Contato</p></div> 
-            <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/welllington-henrique-silva-lima/">Wellington Henrique</a></li>
-            <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/glauber-shoity-nakai-529549273/">Glauber Shoity</a></li>
-            <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/kamilla-barros-silva-85537819a/">Kamilla Silva</a></li>
-        </ul>
-    </nav>
+                <p>©2024 UNIVERSO LITERÁRIO</p>
+            
+            <ul>
+                <div class="nav_footer_div"><p>Contato</p></div> 
+                <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/welllington-henrique-silva-lima/">Wellington Henrique</a></li>
+                <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/glauber-shoity-nakai-529549273/">Glauber Shoity</a></li>
+                <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/kamilla-barros-silva-85537819a/">Kamilla Silva</a></li>
+            </ul>
+        </nav>
     </footer>
 </body>
 </html>

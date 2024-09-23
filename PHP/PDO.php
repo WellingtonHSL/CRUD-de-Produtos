@@ -147,6 +147,7 @@ class usePDO {
     //MÉTODOS PRODUTOS
     public function readProduct($id) {
         try {
+            $stmt = array();
             $stmt = $this->conn->prepare("SELECT * FROM product_registration WHERE id = :id");
             $stmt->execute(['id' => $id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
