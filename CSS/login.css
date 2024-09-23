@@ -177,7 +177,6 @@ a {
 .nav_footer_div p {
     font-size: 25px;
     color: #ffffff;
-    flex-direction: column !important;
     padding-right: 0px;
     padding-left: 0px;
     width: 5px;
@@ -188,22 +187,17 @@ a {
 .nav_footer li {
     color: #FFFFFF;
     padding: 10px;
-    padding-left: 40px;
     margin-top: 100px;
-    margin-right: 0px;
     margin-bottom: 20px;
 }
 
 .nav_footer a {
     font-size: 20px;
     margin-right: 0px;
-    margin-left: 10px;
-    padding-bottom: 0px;
-    margin-top: 10px;
-    text-decoration: none;
-    color: #FFFFFF;
-
+    padding-left: 8px;
+    text-decoration: none !important;
 }
+
 
 .linkedin_icon {
     display: inline;
@@ -211,6 +205,6 @@ a {
     height: 20px;
     top: 961px;
     left: 1071px;
-    gap: 0px;
+    gap: 50px;
     opacity: 0px;  
 }
