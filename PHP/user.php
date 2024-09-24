@@ -36,7 +36,7 @@ class User {
     }
 
     public function encryptPassword() {
-        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+        $this->password = hash('sha256', $this->password);
     }
 }
 ?>
