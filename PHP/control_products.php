@@ -22,6 +22,7 @@ if (isset($_SESSION['email'])) {
 
 $db = usePDO::getInstance();
 $connection = $db->getConnection();
+
 $query = "SELECT * FROM product_registration";
 $stmt = $connection->query($query);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,11 +35,25 @@ if (isset($_GET['delete_id'])) {
     exit;
 }
 
+// Atualiza produto
+if (isset($_GET['update_id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_update = intval($_GET['update_id']);
+    $bookName = trim($_POST['bookName']);
+    $price = trim($_POST['price']);
+    $quantity = trim($_POST['quantity']);
+    $full_name = trim($_POST['full_name']);
+    $description = trim($_POST['description']);
+
+    $db->updateProduct($id_update, $bookName, $full_name, $price, $quantity, $description);
+    header("Location: control_products.php");
+    exit;
+}
+
+// Carrega os dados do produto antes de atualizar
 if (isset($_GET['update_id'])) {
     $id_update = intval($_GET['update_id']);
     $product = $db->readProduct($id_update); 
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +74,7 @@ if (isset($_GET['update_id'])) {
                     <img class="logout_icon" src="../IMG/logout_icon.png" alt="logout icon">
                     </a></li>
                 <li><a href="shopping_cart.php">
-                        <img  class="shopping_cart" src="../IMG/cart_icon.png" alt="shopping cart">
+                    <img class="shopping_cart" src="../IMG/cart_icon.png" alt="shopping cart">
                     </a></li>
             </ul>
         </nav>
@@ -76,21 +91,31 @@ if (isset($_GET['update_id'])) {
     <main>
         <h1>Controle de Produtos</h1>
         <section id="update">
-            <form method=post  action="control_products.php">
+            <form method="post" action="control_products.php?update_id=<?php echo $id_update; ?>">
                 <label for="bookName">Nome do Livro</label>
-                <input type="text" id="bookName" name="bookName" value=" <?php if(isset($product)){echo $product['bookName'];} ?>" placeholder="Nome do Livro" required>
+                <input type="text" id="bookName" name="bookName" 
+                    value="<?php echo isset($product['bookName']) ? htmlspecialchars($product['bookName']) : ''; ?>" 
+                    placeholder="Nome do Livro" required>
                 
-                <label for="price">preço</label>
-                <input type="number" id="price" name="price" value=" <?php if(isset($product)){echo $product['price'];} ?>" placeholder="Preço" required>
+                <label for="price">Preço</label>
+                <input type="number" id="price" name="price" 
+                    value="<?php echo isset($product['price']) ? htmlspecialchars($product['price']) : ''; ?>" 
+                    placeholder="Preço" required>
                 
                 <label for="quantity">Quantidade</label>
-                <input type="number" id="quantity" name="quantity" value=" <?php if(isset($product)){echo $product['quantity'];} ?>" placeholder="Quantidade" required>
+                <input type="number" id="quantity" name="quantity" 
+                    value="<?php echo isset($product['quantity']) ? htmlspecialchars($product['quantity']) : ''; ?>" 
+                    placeholder="Quantidade" required>
                 
                 <label for="full_name">Fornecedor</label>
-                <input type="text" id="full_name" name="full_name" value=" <?php if(isset($product)){echo $product['full_name'];} ?>" placeholder="Fornecedor" required>    
+                <input type="text" id="full_name" name="full_name" 
+                    value="<?php echo isset($product['full_name']) ? htmlspecialchars($product['full_name']) : ''; ?>" 
+                    placeholder="Fornecedor" required>    
                 
-                <label for="description">description</label>
-                <input type="text" id="description" name="description" value=" <?php if(isset($product)){echo $product['description'];} ?>" placeholder="Descrição" required>
+                <label for="description">Descrição</label>
+                <input type="text" id="description" name="description" 
+                    value="<?php echo isset($product['description']) ? htmlspecialchars($product['description']) : ''; ?>" 
+                    placeholder="Descrição" required>
                 
                 <input type="submit" value="Atualizar">
             </form>
@@ -100,19 +125,17 @@ if (isset($_GET['update_id'])) {
             <section id="listProducts">
                 <h3><?php echo htmlspecialchars($product['bookName']); ?></h3>
                 <p><?php echo htmlspecialchars($product['description']); ?></p>
-                <label> R$ <?php echo htmlspecialchars(number_format($product['price'], 2, ',', '.')); ?></label>
+                <label>R$ <?php echo htmlspecialchars(number_format($product['price'], 2, ',', '.')); ?></label>
                     
                 <a href="control_products.php?update_id=<?php echo $product['id']; ?>">Editar</a>
                 <a href="control_products.php?delete_id=<?php echo $product['id']; ?>">Excluir</a>
-
             </section>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
     </main>
 
     <footer>
         <nav class="nav_footer"> 
-                <p>©2024 UNIVERSO LITERÁRIO</p>
-            
+            <p>©2024 UNIVERSO LITERÁRIO</p>
             <ul>
                 <div class="nav_footer_div"><p>Contato</p></div> 
                 <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/welllington-henrique-silva-lima/">Wellington Henrique</a></li>

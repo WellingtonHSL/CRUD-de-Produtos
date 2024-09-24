@@ -152,7 +152,7 @@ class usePDO {
     public function updateProduct($id, $bookName, $full_name, $price, $quantity, $description) {
         try {
             $stmt = $this->conn->prepare("UPDATE product_registration SET bookName = :bookName, full_name = :full_name, price = :price, quantity = :quantity, description = :description WHERE id = :id");
-            $stmt->execute([
+            $success = $stmt->execute([
                 'id' => $id,
                 'bookName' => $bookName,
                 'full_name' => $full_name,
@@ -160,10 +160,18 @@ class usePDO {
                 'quantity' => $quantity,
                 'description' => $description
             ]);
+    
+            if ($success) {
+                echo "Produto atualizado com sucesso!<br>";
+            } else {
+                echo "Erro ao atualizar produto!<br>";
+            }
+    
         } catch (PDOException $e) {
             echo "Erro ao atualizar produto: " . $e->getMessage();
         }
     }
+    
 
     public function deleteProduct($id) {
         try {
