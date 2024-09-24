@@ -33,7 +33,7 @@ class RegisterSupplier {
                         $db->insertSupplier($company_name, $cnpj, $full_name, $email, $phone, $address);
 
                         $_SESSION['success_message'] = "Fornecedor cadastrado com sucesso!";
-                        header('Location: control_supplier.php');
+                        header('Location: supplier_registration.php');
                         exit();
                     } catch (PDOException $e) {
                         echo "Erro ao executar a consulta: " . $e->getMessage();

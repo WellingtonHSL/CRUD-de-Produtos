@@ -95,7 +95,7 @@ class usePDO {
         }
     }
 
-    public function updateSupplier($id, $company_name, $cnpj, $full_name, $email, $phone, $description) {
+    public function updateSupplier($id, $company_name, $cnpj, $full_name, $email, $phone) {
         try {
             $stmt = $this->conn->prepare("UPDATE supplier_registration SET company_name = :company_name, cnpj = :cnpj, full_name = :full_name, phone = :phone, email = :email WHERE id = :id");
             $stmt->execute([
@@ -104,10 +104,8 @@ class usePDO {
                 'cnpj' => $cnpj,
                 'full_name' => $full_name,
                 'email' => $email,
-                'phone' => $phone,
-                'description' => $description
+                'phone' => $phone
             ]);
-            echo "Fornecedor atualizado com sucesso!";
         } catch (PDOException $e) {
             echo "Erro ao atualizar fornecedor: " . $e->getMessage();
         }
@@ -117,7 +115,6 @@ class usePDO {
         try {
             $stmt = $this->conn->prepare("DELETE FROM supplier_registration WHERE id = :id");
             $stmt->execute(['id' => $id]);
-            echo "Fornecedor deletado com sucesso!";
         } catch (PDOException $e) {
             echo "Erro ao deletar fornecedor: " . $e->getMessage();
         }
@@ -134,11 +131,7 @@ class usePDO {
             $stmt->bindParam(':phone', $phone);
             $stmt->bindParam(':address', $address);
 
-            if ($stmt->execute()) {
-                echo "Fornecedor cadastrado com sucesso!";
-            } else {
-                echo "Erro ao cadastrar fornecedor.";
-            }
+            $stmt->execute();   
         } catch (PDOException $e) {
             echo "Erro ao inserir fornecedor: " . $e->getMessage();
         }
@@ -166,7 +159,6 @@ class usePDO {
                 'quantity' => $quantity,
                 'description' => $description
             ]);
-            echo "Produto atualizado com sucesso!";
         } catch (PDOException $e) {
             echo "Erro ao atualizar produto: " . $e->getMessage();
         }

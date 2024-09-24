@@ -60,19 +60,19 @@ if (isset($_SESSION['email'])) {
 
     <main>
         <fieldset>
-            <form action="register_products.php" method="post">
+            <form action="register_supplier.php" method="post">
                 <div class="line_one">
-                    <input type="text" id="company_name" name="company_name" placeholder="Razão Social">
-                    <input type="number" id="cnpj" name="cnpj" placeholder="N° CNPJ">
+                    <input type="text" id="company_name" name="company_name" placeholder="Razão Social" required>
+                    <input type="number" id="cnpj" name="cnpj" placeholder="N° CNPJ" required>
                 </div>
 
-                <input type="text" id="full_name" name="full_name" placeholder="Nome Completo">
+                <input type="text" id="full_name" name="full_name" placeholder="Nome Completo" required>
 
                 <div class="line_two">
-                    <input type="email" id="email" name="email" placeholder="E-mail">
-                    <input type="tel" id="phone" name="phone" placeholder="Telefone">
+                    <input type="email" id="email" name="email" placeholder="E-mail" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Telefone" required >
                 </div>
-                <input type="text" id="address" name="address" placeholder="Endereço">
+                <input type="text" id="address" name="address" placeholder="Endereço" required>
 
                 <input type="submit" value="CADASTRAR FORNECEDOR">
             </form>
