@@ -89,6 +89,88 @@ header {
     text-decoration: underline;
 }
 
+/*MAIN - Controle de Produtos*/
+main {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    width: 80%;
+}
+
+section#update, section#listProducts {
+    width: 45%;
+    height: 45%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+section#update {
+    margin-right: 20px;
+}
+
+section#listProducts {
+    margin-top: 20px;
+}
+
+fieldset {
+    border: 1px solid #DF2A4C;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1D4B3B;
+}
+
+input[type="text"], input[type="number"], input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #1D4B3B;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="submit"] {
+    background-color: #DF2A4C;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #1D4B3B;
+}
+
+section#listProducts h3 {
+    color: #DF2A4C;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+section#listProducts p {
+    font-size: 18px;
+    color: #1D4B3B;
+}
+
+section#listProducts a {
+    text-decoration: none;
+    color: #DF2A4C;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+section#listProducts a:hover {
+    color: #1D4B3B;
+}
+
+
 /*FOOTER*/
 .nav_footer {
     position: fixed;
