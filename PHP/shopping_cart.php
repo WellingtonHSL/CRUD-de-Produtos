@@ -116,18 +116,5 @@ if (empty($cart_products)) {
         </form>
         </div>
     </main>
-
-    <footer>
-        <nav class="nav_footer"> 
-            <p>©2024 UNIVERSO LITERÁRIO</p>
-           
-        <ul>
-            <div class="nav_footer_div"><p>Contato</p></div> 
-            <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/welllington-henrique-silva-lima/">Wellington Henrique</a></li>
-            <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/glauber-shoity-nakai-529549273/">Glauber Shoity</a></li>
-            <li><img class="linkedin_icon" src="../IMG/linkedIn_icon.png" alt="LinkedIn Icon"><a href="https://www.linkedin.com/in/kamilla-barros-silva-85537819a/">Kamilla Silva</a></li>
-        </ul>
-    </nav>
-    </footer>
 </body>
 </html>
