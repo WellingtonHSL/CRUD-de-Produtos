@@ -89,48 +89,51 @@ if (isset($_GET['update_id'])) {
     </header>
 
     <main>
-        <h1>Controle de Produtos</h1>
-        <section id="update">
-            <form method="post" action="control_products.php?update_id=<?php echo $id_update; ?>">
-                <label for="bookName">Nome do Livro</label>
-                <input type="text" id="bookName" name="bookName" 
-                    value="<?php echo isset($product['bookName']) ? htmlspecialchars($product['bookName']) : ''; ?>" 
-                    placeholder="Nome do Livro" required>
+        <?php foreach ($products as $product): 
+            if (isset($_GET['update_id']) && intval($_GET['update_id']) === $product['id']){
+                $updateId = isset($id_update) ? $id_update : $product['id'];
+                echo '<fieldset>';
+                echo '<form method="post" action="control_products.php?update_id=' . $updateId . '">';
+                    echo '<div class="product-item">';      
+                        echo '<label for="bookName">Nome do Livro</label>';
+                        echo '<input type="text" id="bookName" name="bookName" value="' . (isset($product['bookName']) ? htmlspecialchars($product['bookName']) : '') . '" placeholder="Nome do Livro" required>';
+                    echo '</div>';
+                    echo '<div class="product-item">';        
+                        echo '<label for="price">Preço</label>';
+                        echo '<input type="number" id="price" name="price" value="' . (isset($product['price']) ? htmlspecialchars($product['price']) : '') . '" placeholder="Preço" required>';
+                    echo '</div>';
+                    echo '<div class="product-item">';
+                        echo '<label for="quantity">Quantidade</label>';
+                        echo '<input type="number" id="quantity" name="quantity" value="' . (isset($product['quantity']) ? htmlspecialchars($product['quantity']) : '') . '" placeholder="Quantidade" required>';
+                    echo '</div>';
+                    echo '<div class="product-item">';    
+                        echo '<label for="full_name">Fornecedor</label>';
+                        echo '<input type="text" id="full_name" name="full_name" value="' . (isset($product['full_name']) ? htmlspecialchars($product['full_name']) : '') . '" placeholder="Fornecedor" required>';
+                    echo '</div>';
+                        echo '<div class="product-item">';        
+                        echo '<label for="description">Descrição</label>';
+                        echo '<input type="text" id="description" name="description" value="' . (isset($product['description']) ? htmlspecialchars($product['description']) : '') . '" placeholder="Descrição" required>';
+                        
+                        echo '<div class="container-update">';
+                            echo '<input type="submit" value="Salvar" class="update-btn">';
+                        echo '</div>';
+                    echo '</form>';
+                echo '</fieldset>';
                 
-                <label for="price">Preço</label>
-                <input type="number" id="price" name="price" 
-                    value="<?php echo isset($product['price']) ? htmlspecialchars($product['price']) : ''; ?>" 
-                    placeholder="Preço" required>
-                
-                <label for="quantity">Quantidade</label>
-                <input type="number" id="quantity" name="quantity" 
-                    value="<?php echo isset($product['quantity']) ? htmlspecialchars($product['quantity']) : ''; ?>" 
-                    placeholder="Quantidade" required>
-                
-                <label for="full_name">Fornecedor</label>
-                <input type="text" id="full_name" name="full_name" 
-                    value="<?php echo isset($product['full_name']) ? htmlspecialchars($product['full_name']) : ''; ?>" 
-                    placeholder="Fornecedor" required>    
-                
-                <label for="description">Descrição</label>
-                <input type="text" id="description" name="description" 
-                    value="<?php echo isset($product['description']) ? htmlspecialchars($product['description']) : ''; ?>" 
-                    placeholder="Descrição" required>
-                
-                <input type="submit" value="Atualizar">
-            </form>
-
-        </section>
-        <?php foreach ($products as $product): ?>
-            <section id="listProducts">
-                <h3><?php echo htmlspecialchars($product['bookName']); ?></h3>
-                <p><?php echo htmlspecialchars($product['description']); ?></p>
-                <label>R$ <?php echo htmlspecialchars(number_format($product['price'], 2, ',', '.')); ?></label>
+            }else{
+                echo '<fieldset>';
+                    echo '<h3>' . htmlspecialchars($product['bookName']) . '</h3>';
+                    echo '<p>' . htmlspecialchars($product['full_name']) . '</p>';
+                    echo '<p>' . htmlspecialchars($product['description']) . '</p>';
+                    echo '<label>R$ ' . htmlspecialchars(number_format($product['price'], 2, ',', '.')) . '</label>';
                     
-                <a href="control_products.php?update_id=<?php echo $product['id']; ?>">Editar</a>
-                <a href="control_products.php?delete_id=<?php echo $product['id']; ?>">Excluir</a>
-            </section>
-        <?php endforeach; ?>
+                    echo '<div class="product-bt">';
+                        echo '<a href="control_products.php?update_id=' . $product['id'] . '">Editar</a>';
+                        echo '<a href="control_products.php?delete_id=' . $product['id'] . '">Excluir</a>';
+                    echo '</div>';
+                echo '</fieldset>';
+            } 
+        endforeach; ?>
     </main>
 </body>
 </html>
