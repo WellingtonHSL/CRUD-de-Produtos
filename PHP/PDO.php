@@ -95,16 +95,17 @@ class usePDO {
         }
     }
 
-    public function updateSupplier($id, $company_name, $cnpj, $full_name, $email, $phone) {
+    public function updateSupplier($id, $company_name, $cnpj, $full_name, $email, $phone, $address) {
         try {
-            $stmt = $this->conn->prepare("UPDATE supplier_registration SET company_name = :company_name, cnpj = :cnpj, full_name = :full_name, phone = :phone, email = :email WHERE id = :id");
+            $stmt = $this->conn->prepare("UPDATE supplier_registration SET company_name = :company_name, cnpj = :cnpj, full_name = :full_name, phone = :phone, email = :email, address = :address WHERE id = :id");
             $stmt->execute([
                 'id' => $id,
                 'company_name' => $company_name,
                 'cnpj' => $cnpj,
                 'full_name' => $full_name,
                 'email' => $email,
-                'phone' => $phone
+                'phone' => $phone,
+                'address' => $address
             ]);
         } catch (PDOException $e) {
             echo "Erro ao atualizar fornecedor: " . $e->getMessage();
