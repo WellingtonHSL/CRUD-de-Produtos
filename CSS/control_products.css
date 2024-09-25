@@ -89,83 +89,133 @@ header {
     text-decoration: underline;
 }
 
-/*MAIN - Controle de Produtos*/
+/*BODY*/
 main {
     display: flex;
-    justify-content: center;
-    margin: 20px auto;
-    width: 80%;
-}
-
-section#update, section#listProducts {
-    width: 45%;
-    height: 45%;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-section#update {
-    margin-right: 20px;
-}
-
-section#listProducts {
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
 }
 
 fieldset {
-    border: 1px solid #DF2A4C;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #1D4B3B;
-}
-
-input[type="text"], input[type="number"], input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #1D4B3B;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-input[type="submit"] {
-    background-color: #DF2A4C;
-    color: white;
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    max-width: 1200px;
+    min-width: 1100px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
     border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    border-radius: 10px;
 }
 
-input[type="submit"]:hover {
-    background-color: #1D4B3B;
-}
-
-section#listProducts h3 {
-    color: #DF2A4C;
-    font-size: 22px;
+fieldset h3 {
+    font-size: 40px;
     margin-bottom: 10px;
 }
 
-section#listProducts p {
-    font-size: 18px;
-    color: #1D4B3B;
+fieldset label{
+    color: #777777;
+    padding: 10px;
+    font-size: 38px;
 }
 
-section#listProducts a {
-    text-decoration: none;
+fieldset p {
+    color: #777777;
+    padding: 10px;
+    font-size: 32px;
+}
+
+fieldset input {
+    color: #000000;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: 0px 0px 6px rgba(16, 48, 136, 0.5);
+}
+
+fieldset label {
+    color: #777777;
+    padding: 10px;
+    font-size: 20px;
+    max-width: 500px;
+}
+
+.product-bt {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+fieldset a:link,a:visited{
+    font-size: 20px;
     color: #DF2A4C;
-    font-weight: bold;
-    margin-right: 10px;
+    text-decoration: none;
+    background-color: transparent;
+    width: 100px;
 }
 
-section#listProducts a:hover {
+fieldset a:hover{
+    background-color: #1D4B3B;
+    color: #FFFFFF;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.delete{
+    font-size: 20px;
+    color: #DF2A4C;
+    text-decoration: none;
+    background-color: transparent;
+    width: 100px;
+}
+.delete:hover {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.edit {
+    font-size: 20px;
     color: #1D4B3B;
+    text-decoration: none;
+    background-color: transparent;
+    width: 100px;
+}
+
+.edit:hover {
+    background-color: #1D4B3B;
+    color: #FFFFFF;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.container-update {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.update-btn {
+    font-size: 20px;
+    color: #103088;
+    text-decoration: none;
+    background-color: transparent;
+    width: 100px;
+}
+
+.update-btn:hover {
+    background-color: #103088;
+    color: #FFFFFF;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 100px;
 }
