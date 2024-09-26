@@ -51,7 +51,7 @@ Um Diagrama Entidade-Relacionamento (DER) foi elaborado para representar os rela
    git clone https://github.com/WellingtonHSL/CRUD-de-Produtos.git
 
 
-##colaboradores(Alunos):
+##colaboradores(Alunos):##
 - **Wellington Henrique da Silva Lima**
 - **Kamilla Barros Silva**
 - **Glauber Shoity Nakai**
